@@ -18,7 +18,7 @@ export default class App extends Component {
   }
 
   btnPerssed = () => {
-    //debugger;  
+    debugger;  
     console.log('in btn function2');
     console.log('txt1=', this.txt1);
     console.log('txt2=', this.txt2);
@@ -31,7 +31,7 @@ export default class App extends Component {
     return (
       <View>
         <Header
-          leftComponent={{ icon: 'bell', color: '#fff' }}
+          leftComponent={{ icon: 'menu', color: '#fff' }}
           centerComponent={{ text: 'MY TITLE', style: { color: '#fff' } }}
           rightComponent={{ icon: 'home', color: '#fff' }}
         />
