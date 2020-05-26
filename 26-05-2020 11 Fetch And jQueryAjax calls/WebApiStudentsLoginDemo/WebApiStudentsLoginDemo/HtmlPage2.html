@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        function btnGetStudents() {
+            console.log('start');
+
+            var url = 'http://localhost:58672/api/student';
+            fetch(url,
+                {
+                    method: 'GET', // 'GET', 'POST', 'PUT', 'DELETE', etc.
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }),
+                }) // Call the fetch function passing the url of the API as a parameter
+                .then((resp) => resp.json()) // Transform the data into json
+                .then(function (data) {
+                    //alert(data);
+                    console.log(data);
+                    //console.log(data[0]);
+                    if (data[0] != null) {
+                        console.log(data[0].Email);
+                        console.log(data[0].Password);
+                    }
+                    else {
+                        console.log('no students to show');
+                    }
+                })
+                .catch(function (err) {
+                    alert(err);
+                });
+
+            console.log('after');
+        }
+
+        function btnGetStudentByEmailAndPass() {
+            console.log('start');
+
+            var url = 'http://localhost:58672/api/student';
+            //var url = 'http://localhost:58672/api/student?email=avi@a.com&password=avi123';
+            fetch(url + '?email=avi@a.com&password=avi123',
+                {
+                    method: 'GET', // 'GET', 'POST', 'PUT', 'DELETE', etc.
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }),
+                }) // Call the fetch function passing the url of the API as a parameter
+                .then((resp) => resp.json()) // Transform the data into json
+                .then(function (data) {
+                    //alert(data);
+                    console.log(data);
+                    //console.log(data[0]);
+                    if (data != null) {
+                        console.log(data.Email);
+                        console.log(data.Password);
+                    }
+                    else {
+                        console.log('wrong email or password!');
+                    }
+                })
+                .catch(function (err) {
+                    alert(err);
+                });
+
+            console.log('after');
+        }
+
+        function btnPostStudentByEmailAndPass() {
+            console.log('start');
+
+            let studentObj = {
+                "ID": 0,
+                "Name": "stam",
+                "Email": "avi@a.com",
+                "Password": "avi123",
+                "Grade": 0
+            }
+
+            var url = 'http://localhost:58672/api/student';
+            fetch(url,
+                {
+                    method: 'POST', // 'GET', 'POST', 'PUT', 'DELETE', etc.
+                    headers: new Headers({
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    }),
+                    body: JSON.stringify(studentObj)
+                }) // Call the fetch function passing the url of the API as a parameter
+                .then((resp) => resp.json()) // Transform the data into json
+                .then(function (data) {
+                    //alert(data);
+                    console.log(data);
+                    //console.log(data[0]);
+                    if (data != null) {
+                        console.log(data.Email);
+                        console.log(data.Password);
+                    }
+                    else {
+                        console.log('wrong email or password!');
+                    }
+                })
+                .catch(function (err) {
+                    alert(err);
+                });
+
+            console.log('after');
+        }
+    </script>
+</head>
+<body>
+    <button onclick="btnGetStudents()">Get Students</button>
+    <button onclick="btnGetStudentByEmailAndPass()">Get Student By Email And Pass</button>
+    <button onclick="btnPostStudentByEmailAndPass()">Post Student by email and pass</button>
+</body>
+</html>
