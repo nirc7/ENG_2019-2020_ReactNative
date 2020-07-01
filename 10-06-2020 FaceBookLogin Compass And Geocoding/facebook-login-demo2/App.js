@@ -1,12 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 
-import * as Facebook from 'expo-facebook';
+import * as Facebook from 'expo-facebook';
 
 export default function App() {
   let appId = '[YOUR_APP_ID]';
 
   async function btnFBLogin() {
+    console.log(appId);
+
     try {
       await Facebook.initializeAsync(appId);
       const { type, token, expires, permissions, declinedPermissions, }
@@ -18,7 +20,7 @@ export default function App() {
         const response = await fetch(`https://graph.facebook.com/me?fields=id,name,email,picture&access_token=${token}`);
         let res = await response.json();
         console.log(res.picture.data.url);
-        
+
         Alert.alert('Logged in!', `Hi NAME: ${res.name}!\nEMAIL: ${res.email}\nPICTURE: ${res.picture.data.url}`);
         //Alert.alert('Logged in!', `Hi NAME: ${res.name}!\nEMAIL: ${res.email}\nPICTURE: ${res.picture}\nRES:${JSON.stringify(res)} `);
       } else { type === 'cancel' }
